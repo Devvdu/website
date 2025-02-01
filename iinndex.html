@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillSage - Professional Learning Platform</title>
+    <title>SkillSage - Complete Learning Platform</title>
     <style>
         * {
             margin: 0;
@@ -18,12 +19,99 @@
             color: #fff;
         }
 
+        /* Login Section */
+        .login-container {
+            display: flex;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .sectors-showcase {
+            flex: 1;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 20px;
+            margin-right: 2rem;
+        }
+
+        .login-section {
+            width: 400px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5em;
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00bcd4;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sector-icon {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s;
+        }
+
+        .sector-icon:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            display: none;
+            padding: 2rem;
+        }
+
         .nav-bar {
             background: rgba(0, 0, 0, 0.5);
             padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
         }
 
         .logo {
@@ -32,49 +120,22 @@
             font-weight: bold;
         }
 
-        #login-container {
+        .user-info {
             display: flex;
-            min-height: 100vh;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            gap: 1rem;
         }
 
-        .login-box {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 2rem;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: none;
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #00bcd4;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 5px;
+        .logout-btn {
             background: rgba(255, 255, 255, 0.1);
+            border: none;
             color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .sectors {
+        .sectors-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
@@ -86,7 +147,7 @@
             border-radius: 15px;
             padding: 1.5rem;
             cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.3s;
         }
 
         .sector-card:hover {
@@ -94,19 +155,19 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* Course Section */
         .course-container {
-            display: none;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
             padding: 2rem;
             margin-top: 2rem;
+            display: none;
         }
 
         .course-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
         }
 
         .course-card {
@@ -121,6 +182,7 @@
             transform: translateY(-5px);
         }
 
+        /* Content Section */
         .content-section {
             display: none;
             background: rgba(0, 0, 0, 0.3);
@@ -129,26 +191,25 @@
             margin-top: 2rem;
         }
 
-        .btn {
-            background: #00bcd4;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
+            margin: 1rem 0;
         }
 
-        .btn:hover {
-            background: #008ba3;
+        .progress {
+            height: 100%;
+            background: #00bcd4;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s;
         }
 
         .tab-container {
             display: flex;
             gap: 1rem;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
         }
 
         .tab {
@@ -169,19 +230,18 @@
             padding: 1.5rem;
         }
 
-        .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
+        .btn {
+            background: #00bcd4;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
             border-radius: 5px;
-            margin: 1rem 0;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .progress {
-            height: 100%;
-            background: #00bcd4;
-            border-radius: 5px;
-            width: 0%;
-            transition: width 0.3s;
+        .btn:hover {
+            background: #008ba3;
         }
 
         .exercise {
@@ -191,42 +251,65 @@
             margin-top: 1rem;
         }
 
-        pre {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 1rem 0;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        #logout-btn {
-            background: rgba(255, 0, 0, 0.3);
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
         }
 
-        .welcome-message {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
 
-        .welcome-message h1 {
-            color: #00bcd4;
-            margin-bottom: 0.5rem;
+            .sectors-showcase {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .login-section {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="login-container">
-        <div class="login-box">
-            <div class="welcome-message">
-                <h1>SkillSage</h1>
-                <p>Your journey to professional excellence starts here</p>
+    <!-- Login Page -->
+    <div id="login-page" class="login-container">
+        <div class="sectors-showcase">
+            <h2>Professional Sectors</h2>
+            <div class="sector-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#00bcd4">
+                    <path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-8-2h4v2h-4V4z"/>
+                </svg>
+                <div>
+                    <div class="sector-title">Business & Finance</div>
+                    <div class="sector-description">Management & Financial Services</div>
+                </div>
             </div>
-            <form id="login-form" onsubmit="return handleLogin(event)">
+            <div class="sector-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#00bcd4">
+                    <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                </svg>
+                <div>
+                    <div class="sector-title">Technology</div>
+                    <div class="sector-description">IT & Software Development</div>
+                </div>
+            </div>
+            <!-- Add more sector icons as needed -->
+        </div>
+
+        <div class="login-section">
+            <div class="login-header">
+                <h1>SkillSage</h1>
+                <p>Access your learning dashboard</p>
+            </div>
+            <form id="login-form">
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" required>
@@ -240,57 +323,57 @@
         </div>
     </div>
 
-    <div id="platform-container" style="display: none;">
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
         <nav class="nav-bar">
             <div class="logo">SkillSage</div>
-            <div style="display: flex; gap: 1rem; align-items: center;">
-                <span id="user-info">Welcome, User!</span>
-                <button id="logout-btn" onclick="logout()">Logout</button>
+            <div class="user-info">
+                <span id="user-name">Welcome, User!</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
         </nav>
 
-        <div class="main-container" style="display: block;">
-            <div class="sectors" id="sectors">
-                <div class="sector-card" onclick="showCourses('technology')">
-                    <h2>Technology</h2>
-                    <p>Programming, Web Development, and more</p>
-                </div>
-                <div class="sector-card" onclick="showCourses('business')">
-                    <h2>Business & Finance</h2>
-                    <p>Management, Finance, and Analytics</p>
-                </div>
-                <div class="sector-card" onclick="showCourses('healthcare')">
-                    <h2>Healthcare</h2>
-                    <p>Medical Sciences and Healthcare Management</p>
-                </div>
-                <div class="sector-card" onclick="showCourses('entertainment')">
-                    <h2>Entertainment & Media</h2>
-                    <p>Digital Media, Production, and Design</p>
-                </div>
+        <div class="sectors-grid">
+            <div class="sector-card" onclick="showCourses('technology')">
+                <h2>Technology</h2>
+                <p>Programming, Web Development, and more</p>
             </div>
+            <div class="sector-card" onclick="showCourses('business')">
+                <h2>Business & Finance</h2>
+                <p>Management, Finance, and Analytics</p>
+            </div>
+            <div class="sector-card" onclick="showCourses('healthcare')">
+                <h2>Healthcare</h2>
+                <p>Medical Sciences and Healthcare Management</p>
+            </div>
+            <div class="sector-card" onclick="showCourses('entertainment')">
+                <h2>Entertainment & Media</h2>
+                <p>Digital Media, Production, and Design</p>
+            </div>
+        </div>
 
-            <div id="course-container" class="course-container">
-                <h2 id="sector-title"></h2>
-                <div id="course-grid" class="course-grid"></div>
-            </div>
+        <div id="course-container" class="course-container">
+            <h2 id="sector-title"></h2>
+            <div id="course-grid" class="course-grid"></div>
+        </div>
 
-            <div id="content-section" class="content-section">
-                <h2 id="course-title"></h2>
-                <div class="progress-bar">
-                    <div class="progress" id="course-progress"></div>
-                </div>
-                <div class="tab-container">
-                    <div class="tab active" onclick="showTab('study')">Study Plan</div>
-                    <div class="tab" onclick="showTab('content')">Course Content</div>
-                    <div class="tab" onclick="showTab('exercise')">Exercises</div>
-                    <div class="tab" onclick="showTab('interview')">Interview Prep</div>
-                </div>
-                <div class="content-area" id="content-area"></div>
+        <div id="content-section" class="content-section">
+            <h2 id="course-title"></h2>
+            <div class="progress-bar">
+                <div class="progress" id="course-progress"></div>
             </div>
+            <div class="tab-container">
+                <div class="tab active" onclick="showTab('study')">Study Plan</div>
+                <div class="tab" onclick="showTab('content')">Course Content</div>
+                <div class="tab" onclick="showTab('exercise')">Exercises</div>
+                <div class="tab" onclick="showTab('interview')">Interview Prep</div>
+            </div>
+            <div class="content-area" id="content-area"></div>
         </div>
     </div>
 
     <script>
+        // Course data
         const courses = {
             technology: [
                 {
@@ -300,164 +383,73 @@
                         study: `
                             <h3>Python Learning Path</h3>
                             <ul>
-                                <li>Week 1: Basic Syntax and Data Types
-                                    <ul>
-                                        <li>Variables and Data Types</li>
-                                        <li>Basic Operators</li>
-                                        <li>Input/Output Operations</li>
-                                    </ul>
-                                </li>
-                                <li>Week 2: Control Flow and Functions
-                                    <ul>
-                                        <li>Conditional Statements</li>
-                                        <li>Loops and Iterations</li>
-                                        <li>Function Definition and Usage</li>
-                                    </ul>
-                                </li>
-                                <li>Week 3: Data Structures
-                                    <ul>
-                                        <li>Lists and Tuples</li>
-                                        <li>Dictionaries and Sets</li>
-                                        <li>String Operations</li>
-                                    </ul>
-                                </li>
-                                <li>Week 4: Advanced Concepts
-                                    <ul>
-                                        <li>File Handling</li>
-                                        <li>Exception Handling</li>
-                                        <li>Modules and Packages</li>
-                                    </ul>
-                                </li>
+                                <li>Week 1: Basic Syntax and Data Types</li>
+                                <li>Week 2: Control Flow and Functions</li>
+                                <li>Week 3: Object-Oriented Programming</li>
+                                <li>Week 4: Libraries and Frameworks</li>
                             </ul>
                         `,
                         content: `
                             <h3>Introduction to Python</h3>
-                            <p>Python is a high-level, interpreted programming language known for its simplicity and readability.</p>
-                            
-                            <h4>Your First Python Program</h4>
-                            <pre>
-# This is a simple Hello World program
+                            <p>Python is a high-level, interpreted programming language known for its readability and versatility.</p>
+                            <div class="exercise">
+                                <h4>Quick Example:</h4>
+                                <pre>
 print("Hello, World!")
-
-# Getting input from user
 name = input("Enter your name: ")
 print(f"Welcome, {name}!")
-                            </pre>
-
-                            <h4>Variables and Data Types</h4>
-                            <pre>
-# Numbers
-age = 25                  # integer
-height = 5.9             # float
-
-# Strings
-name = "John Doe"
-message = 'Hello there'
-
-# Boolean
-is_student = True
-is_working = False
-
-# Printing variables
-print(f"Age: {age}")
-print(f"Height: {height}")
-print(f"Name: {name}")
-                            </pre>
+                                </pre>
+                            </div>
                         `,
                         exercise: `
                             <h3>Practice Exercises</h3>
-                            
                             <div class="exercise">
-                                <h4>Exercise 1: Basic Variables</h4>
-                                <p>Create a program that:</p>
-                                <ol>
-                                    <li>Asks for the user's name</li>
-                                    <li>Asks for their age</li>
-                                    <li>Calculates and prints how old they will be in 10 years</li>
-                                </ol>
-                                <button class="btn" onclick="checkExercise(1)">Submit Solution</button>
-                            </div>
-
-                            <div class="exercise">
-                                <h4>Exercise 2: Simple Calculator</h4>
-                                <p>Create a basic calculator that:</p>
-                                <ol>
-                                    <li>Takes two numbers as input</li>
-                                    <li>Performs addition, subtraction, multiplication, and division</li>
-                                    <li>Prints all results</li>
-                                </ol>
-                                <button class="btn" onclick="checkExercise(2)">Submit Solution</button>
+                                <h4>Exercise 1: Variables and Print</h4>
+                                <p>Create a program that asks for user's name and age, then prints them.</p>
+                                <button class="btn" onclick="checkExercise()">Submit Solution</button>
                             </div>
                         `,
                         interview: `
-                            <h3>Common Python Interview Questions</h3>
-                            
+                            <h3>Interview Questions</h3>
                             <div class="exercise">
-                                <h4>Basic Concepts</h4>
+                                <h4>Common Python Interview Topics:</h4>
                                 <ul>
-                                    <li>What is Python? What are its key features?</li>
-                                    <li>Explain Python's memory management</li>
-                                    <li>What is PEP 8?</li>
+                                    <li>List comprehension vs loops</li>
+                                    <li>Dictionary methods</li>
+                                    <li>Object-oriented concepts</li>
                                 </ul>
-                            </div>
-
-                            <div class="exercise">
-                                <h4>Data Structures</h4>
-                                <ul>
-                                    <li>Difference between list and tuple</li>
-                                    <li>How do dictionaries work in Python?</li>
-                                    <li>What are list comprehensions?</li>
-                                </ul>
-                            </div>
-
-                            <div class="exercise">
-                                <h4>Practice Question</h4>
-                                <p>Write a program to reverse a string without using the reverse function.</p>
-                                <pre>
-def reverse_string(s):
-    # Your solution here
-    pass
-                                </pre>
                             </div>
                         `
                     }
                 },
                 {
                     title: 'Java Programming',
-                    description: 'Master Java development',
-                    content: {
-                        study: 'Coming soon...',
-                        content: 'Coming soon...',
-                        exercise: 'Coming soon...',
-                        interview: 'Coming soon...'
-                    }
+                    description: 'Master Java development'
                 },
                 {
                     title: 'Web Development',
-                    description: 'HTML, CSS, and JavaScript',
-                    content: {
-                        study: 'Coming soon...',
-                        content: 'Coming soon...',
-                        exercise: 'Coming soon...',
-                        interview: 'Coming soon...'
-                    }
+                    description: 'HTML, CSS, and JavaScript'
                 }
             ],
             business: [
                 {
                     title: 'Financial Management',
-                    description: 'Understanding business finance',
-                    content: {
-                        study: 'Coming soon...',
-                        content: 'Coming soon...',
-                        exercise: 'Coming soon...',
-                        interview: 'Coming soon...'
-                    }
-                }
-            ],
-            healthcare: [
+                    description: 'Understanding business finance'
+                },
                 {
-                    title: 'Medical Terminology',
-                    description: 'Basic medical vocabulary',
-                    content: {
-                        study: 'Coming soon
+                    title: 'Marketing Strategy',
+                    description: 'Digital marketing and branding'
+                }
+            ]
+            // Add more sectors and courses as needed
+        };
+
+        // Login handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'Techvibe' && password === 'techvibe123') {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('dashboard').style.display =
