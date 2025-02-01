@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSage - Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #00bcd4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .sectors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sector-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .course-container {
+            display: none;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tab.active {
+            background: #00bcd4;
+        }
+
+        .content-area {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        .progress {
+            height: 100%;
+            background: #00bcd4;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .exercise {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            background: #00bcd4;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #008ba3;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="logo">SkillSage</div>
+        <div id="user-info">Welcome, User!</div>
+    </nav>
+
+    <div class="main-container">
+        <div class="sectors" id="sectors">
+            <div class="sector-card" onclick="showCourses('technology')">
+                <h2>Technology</h2>
+                <p>Programming, Web Development, and more</p>
+            </div>
+            <div class="sector-card" onclick="showCourses('business')">
+                <h2>Business & Finance</h2>
+                <p>Management, Finance, and Analytics</p>
+            </div>
+            <div class="sector-card" onclick="showCourses('healthcare')">
+                <h2>Healthcare</h2>
+                <p>Medical Sciences and Healthcare Management</p>
+            </div>
+            <div class="sector-card" onclick="showCourses('entertainment')">
+                <h2>Entertainment & Media</h2>
+                <p>Digital Media, Production, and Design</p>
+            </div>
+        </div>
+
+        <div id="course-container" class="course-container">
+            <h2 id="sector-title"></h2>
+            <div id="course-grid" class="course-grid"></div>
+        </div>
+
+        <div id="content-section" class="content-section">
+            <h2 id="course-title"></h2>
+            <div class="progress-bar">
+                <div class="progress" id="course-progress"></div>
+            </div>
+            <div class="tab-container">
+                <div class="tab active" onclick="showTab('study')">Study Plan</div>
+                <div class="tab" onclick="showTab('content')">Course Content</div>
+                <div class="tab" onclick="showTab('exercise')">Exercises</div>
+                <div class="tab" onclick="showTab('interview')">Interview Prep</div>
+            </div>
+            <div class="content-area" id="content-area"></div>
+        </div>
+    </div>
+
+    <script>
+        const courses = {
+            technology: [
+                {
+                    title: 'Python Programming',
+                    description: 'Learn Python from basics to advanced',
+                    content: {
+                        study: `
+                            <h3>Python Learning Path</h3>
+                            <ul>
+                                <li>Week 1: Basic Syntax and Data Types</li>
+                                <li>Week 2: Control Flow and Functions</li>
+                                <li>Week 3: Object-Oriented Programming</li>
+                                <li>Week 4: Libraries and Frameworks</li>
+                            </ul>
+                        `,
+                        content: `
+                            <h3>Introduction to Python</h3>
+                            <p>Python is a high-level, interpreted programming language...</p>
+                            <div class="exercise">
+                                <h4>Quick Example:</h4>
+                                <pre>
+print("Hello, World!")
+name = input("Enter your name: ")
+print(f"Welcome, {name}!")
+                                </pre>
+                            </div>
+                        `,
+                        exercise: `
+                            <h3>Practice Exercises</h3>
+                            <div class="exercise">
+                                <h4>Exercise 1: Variables and Print</h4>
+                                <p>Create a program that asks for user's name and age, then prints them.</p>
+                                <button class="btn" onclick="checkExercise()">Submit Solution</button>
+                            </div>
+                        `,
+                        interview: `
+                            <h3>Interview Questions</h3>
+                            <div class="exercise">
+                                <h4>Common Python Interview Topics:</h4>
+                                <ul>
+                                    <li>List comprehension vs loops</li>
+                                    <li>Dictionary methods</li>
+                                    <li>Object-oriented concepts</li>
+                                </ul>
+                            </div>
+                        `
+                    }
+                },
+                {
+                    title: 'Java Programming',
+                    description: 'Master Java development'
+                },
+                {
+                    title: 'Web Development',
+                    description: 'HTML, CSS, and JavaScript'
+                },
+                {
+                    title: 'C/C++ Programming',
+                    description: 'System programming and algorithms'
+                }
+            ],
+            business: [
+                {
+                    title: 'Financial Management',
+                    description: 'Understanding business finance'
+                },
+                {
+                    title: 'Marketing Strategy',
+                    description: 'Digital marketing and branding'
+                }
+            ],
+            healthcare: [
+                {
+                    title: 'Medical Terminology',
+                    description: 'Basic medical vocabulary'
+                },
+                {
+                    title: 'Healthcare Management',
+                    description: 'Managing healthcare facilities'
+                }
+            ],
+            entertainment: [
+                {
+                    title: 'Digital Media Production',
+                    description: 'Create digital content'
+                },
+                {
+                    title: 'Content Creation',
+                    description: 'Social media and content strategy'
+                }
+            ]
+        };
+
+        function showCourses(sector) {
+            const container = document.getElementById('course-container');
+            const grid = document.getElementById('course-grid');
+            const title = document.getElementById('sector-title');
+            
+            title.textContent = sector.charAt(0).toUpperCase() + sector.slice(1) + ' Courses';
+            grid.innerHTML = '';
+            
+            courses[sector].forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.innerHTML = `
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                `;
+                card.onclick = () => showCourseContent(course);
+                grid.appendChild(card);
+            });
+            
+            container.style.display = 'block';
+            document.getElementById('content-section').style.display = 'none';
+        }
+
+        function showCourseContent(course) {
+            const contentSection = document.getElementById('content-section');
+            const courseTitle = document.getElementById('course-title');
+            const progress = document.getElementById('course-progress');
+            
+            courseTitle.textContent = course.title;
+            progress.style.width = '0%';
+            contentSection.style.display = 'block';
+            
+            showTab('study');
+            
+            // Simulate progress
+            setTimeout(() => {
+                progress.style.width = '30%';
+            }, 500);
+        }
+
+        function showTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const contentArea = document.getElementById('content-area');
+            const course = courses.technology[0]; // Using Python course as example
+            contentArea.innerHTML = course.content[tab] || 'Content coming soon...';
+        }
+
+        function checkExercise() {
+            alert('Great job! Your solution has been submitted for review.');
+        }
+    </script>
+</body>
+</html>
