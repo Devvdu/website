@@ -44,29 +44,38 @@ For Software: VSCode, Git, GitHub
 For Software: GitHub
 
 # Screenshots (Add at least 3)
-![alt text](image.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+
+![image](https://github.com/user-attachments/assets/bfd9221c-1dac-4ae3-ad0e-02a31e9f465a)
+![image](https://github.com/user-attachments/assets/22efc4c2-3e9e-4ab3-bd03-271bbba5e083)
+![image](https://github.com/user-attachments/assets/558a0ad8-8b92-41d5-bbb6-1a974dcf6bee)
+
+
+
+
+
 
 
 # Diagrams
 
-![alt text](image-4.png)
+![image](https://github.com/user-attachments/assets/4c23a324-3842-4d90-b58d-cb63db2b243a)
 
 
 
 # Schematic & Circuit
-![alt text](image-5.png)
+![image](https://github.com/user-attachments/assets/6f7f749f-c429-45f3-822d-ef637ca6209b)
 
 # Build Photos
 Team:
-![alt text](image-6.png)
+![image](https://github.com/user-attachments/assets/e6354f2c-65ae-4a1e-9f87-94019da006b9)
+
 
 
 ### Project Demo
 # Video
 <video controls src="WhatsApp Video 2025-02-01 at 6.37.28 PM.mp4" title="Title"></video>
 <video controls src="WhatsApp Video 2025-02-01 at 6.37.36 PM.mp4" title="Title"></video>
+
+
 
 
 
