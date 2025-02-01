@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSage - Master Your Skills</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1e1e1e, #b8860b); /* Black and Gold Gradient */
+            color: white;
+        }
+
+        h1, h2 {
+            font-weight: 600;
+            color: white;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FFD700; /* Gold color */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background: #111;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 50px;
+        }
+
+        /* Login / Signup Container */
+        .login-container, .sector-selection-container, .sector-content-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Login Form */
+        .login-form {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            background-color: #222;
+            color: white;
+        }
+
+        .login-form button {
+            background-color: #FFD700;
+            color: black;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-form button:hover {
+            background-color: #e6c200;
+        }
+
+        .login-form a {
+            color: #FFD700;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Sector Selection Container */
+        .sector-selection-container {
+            text-align: center;
+            padding: 50px 0;
+            display: none;
+        }
+
+        .sector-card {
+            background-color: #111;
+            color: white;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 30px;
+            display: inline-block;
+            width: 250px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .sector-card h3 {
+            color: #FFD700;
+        }
+
+        /* Sector Content Container */
+        .sector-content-container {
+            display: none;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .content-card {
+            background-color: #111;
+            color: white;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 30px;
+            display: inline-block;
+            width: 250px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .content-card h3 {
+            color: #FFD700;
+        }
+
+        /* Back button */
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #e6c200;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">SkillSage</div>
+        <p>Your path to mastering essential skills for success!</p>
+    </header>
+
+    <!-- Login Page -->
+    <div class="login-container" id="login-container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" />
+            <input type="password" id="password" placeholder="Password" />
+            <button onclick="login()">Log In</button>
+            <p>Don't have an account? <a href="javascript:void(0)" onclick="alert('Please sign up via an external method')">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Sector Selection Page -->
+    <div class="sector-selection-container" id="sector-selection-container">
+        <h2>Choose a Sector to Explore</h2>
+        <div class="sector-card" onclick="showSectorContent('business-management')">
+            <h3>Business and Management</h3>
+            <p>Leadership, Management, Marketing, and more</p>
+        </div>
+        <div class="sector-card" onclick="showSectorContent('technology-it')">
+            <h3>Technology and IT</h3>
+            <p>Programming, Data Science, AI, and more</p>
+        </div>
+        <div class="sector-card" onclick="showSectorContent('finance-banking')">
+            <h3>Finance and Banking</h3>
+            <p>Accounting, Investment, Financial Planning</p>
+        </div>
+        <div class="sector-card" onclick="showSectorContent('healthcare-pharma')">
+            <h3>Healthcare and Pharmaceuticals</h3>
+            <p>Medical Research, Patient Care, Health Policy</p>
+        </div>
+        <div class="sector-card" onclick="showSectorContent('marketing-entertainment')">
+            <h3>Marketing, Advertising, and Entertainment</h3>
+            <p>Branding, Social Media, Advertising</p>
+        </div>
+        <div class="sector-card" onclick="showSectorContent('education-training')">
+            <h3>Education and Training</h3>
+            <p>Teaching, Curriculum Development, E-learning</p>
+        </div>
+    </div>
+
+    <!-- Business and Management Content -->
+    <div class="sector-content-container" id="business-management-content">
+        <h2>Business and Management - Key Skills</h2>
+        <div class="content-card">
+            <h3>Leadership and Team Management</h3>
+            <p>Developing effective leadership and management skills for teams.</p>
+        </div>
+        <div class="content-card">
+            <h3>Strategic Thinking</h3>
+            <p>Learning to think strategically for organizational growth.</p>
+        </div>
+        <div class="content-card">
+            <h3>Project Management</h3>
+            <p>Managing projects with success using tools like Scrum and Agile.</p>
+        </div>
+        <button class="back-button" onclick="backToSectorSelection()">Back to Sector Selection</button>
+    </div>
+
+    <!-- Technology and IT Content -->
+    <div class="sector-content-container" id="technology-it-content">
+        <h2>Technology and IT - Key Skills</h2>
+        <div class="content-card">
+            <h3>Programming (Python, Java, C++, JavaScript)</h3>
+            <p>Learn the core programming languages in the tech world.</p>
+        </div>
+        <div class="content-card">
+            <h3>AI & Machine Learning</h3>
+            <p>Understand the fundamentals of AI and ML for smarter decision making.</p>
+        </div>
+        <div class="content-card">
+            <h3>Cybersecurity & Ethical Hacking</h3>
+            <p>Protect systems and networks from cyber threats.</p>
+        </div>
+        <div class="content-card">
+            <h3>Data Science</h3>
+            <p>Learn data analytics, data visualization, and Big Data concepts.</p>
+        </div>
+        <button class="back-button" onclick="backToSectorSelection()">Back to Sector Selection</button>
+    </div>
+
+    <!-- Finance and Banking Content -->
+    <div class="sector-content-container" id="finance-banking-content">
+        <h2>Finance and Banking - Key Skills</h2>
+        <div class="content-card">
+            <h3>Accounting Principles</h3>
+            <p>Understanding the basics of accounting for financial reporting.</p>
+        </div>
+        <div class="content-card">
+            <h3>Investment Management</h3>
+            <p>Learn how to manage investments for growth and risk management.</p>
+        </div>
+        <button class="back-button" onclick="backToSectorSelection()">Back to Sector Selection</button>
+    </div>
+
+    <!-- Healthcare and Pharmaceuticals Content -->
+    <div class="sector-content-container" id="healthcare-pharma-content">
+        <h2>Healthcare and Pharmaceuticals - Key Skills</h2>
+        <div class="content-card">
+            <h3>Medical Research</h3>
+            <p>Developing skills in clinical research and pharmaceutical studies.</p>
+        </div>
+        <div class="content-card">
+            <h3>Patient Care</h3>
+            <p>Understanding patient needs and providing effective care strategies.</p>
+        </div>
+        <button class="back-button" onclick="backToSectorSelection()">Back to Sector Selection</button>
+    </div>
+
+    <!-- Marketing, Advertising, and Entertainment Content -->
+    <div class="sector-content-container" id="marketing-entertainment-content">
+        <h2>Marketing, Advertising, and Entertainment - Key Skills</h2>
+        <div class="content-card">
+            <h3>Social Media Marketing</h3>
+            <p>Building effective strategies on social media platforms.</p>
+        </div>
+        <div class="content-card">
+            <h3>Branding & Advertising</h3>
+            <p>Creating memorable brands and marketing strategies.</p>
+        </div>
+        <button class="back-button" onclick="backToSectorSelection()">Back to Sector Selection</button>
+    </div>
+
+    <!-- Education and Training Content -->
+    <div class="sector-content-container" id="education-training-content">
+        <h2>Education and Training - Key Skills</h2>
+        <div class="content-card">
+            <h3>Curriculum Development</h3>
+            <p>Designing and implementing educational programs.</p>
+        </div>
+        <div class="content-card">
+            <h3>Teaching Methodologies</h3>
+            <p>Learning innovative teaching methods for better student engagement.</p>
+        </div>
+        <button class="back-button" onclick="backToSectorSelection()">Back to Sector Selection</button>
+    </div>
+
+    <script>
+        // Check if the user is logged in (for demo purposes, checking username and password)
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Username and password validation (Techvibe & techvibe123)
+            if (username === 'Techvibe' && password === 'techvibe123') {
+                // Successful login - hide login page and show sector selection
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('sector-selection-container').style.display = 'block';
+            } else {
+                alert('Invalid login credentials. Please try again.');
+            }
+        }
+
+        // Function to show sector content page
+        function showSectorContent(sector) {
+            // Hide all sector content containers
+            const contentContainers = document.querySelectorAll('.sector-content-container');
+            contentContainers.forEach(container => container.style.display = 'none');
+
+            // Show the selected sector content
+            const selectedSector = document.getElementById(sector + '-content');
+            selectedSector.style.display = 'block';
+        }
+
+        // Back to sector selection
+        function backToSectorSelection() {
+            document.getElementById('sector-selection-container').style.display = 'block';
+            const contentContainers = document.querySelectorAll('.sector-content-container');
+            contentContainers.forEach(container => container.style.display = 'none');
+        }
+    </script>
+</body>
+</html>
