@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSage - Professional Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            min-height: 100vh;
+            display: flex;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .sectors-showcase {
+            flex: 1;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sector-icon {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+        .sector-icon:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .login-section {
+            width: 400px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5em;
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00bcd4;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .login-btn {
+            background: #00bcd4;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #008ba3;
+        }
+
+        .sector-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .sector-description {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sectors-showcase">
+            <h2 style="margin-bottom: 20px;">Professional Sectors</h2>
+            
+            <div class="sector-icon floating-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#00bcd4">
+                    <path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-8-2h4v2h-4V4z"/>
+                </svg>
+                <div>
+                    <div class="sector-title">Business & Finance</div>
+                    <div class="sector-description">Management & Financial Services</div>
+                </div>
+            </div>
+
+            <div class="sector-icon floating-icon" style="animation-delay: 0.2s">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#00bcd4">
+                    <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                </svg>
+                <div>
+                    <div class="sector-title">Technology</div>
+                    <div class="sector-description">IT & Software Development</div>
+                </div>
+            </div>
+
+            <div class="sector-icon floating-icon" style="animation-delay: 0.4s">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#00bcd4">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                </svg>
+                <div>
+                    <div class="sector-title">Healthcare</div>
+                    <div class="sector-description">Medical & Healthcare Services</div>
+                </div>
+            </div>
+
+            <div class="sector-icon floating-icon" style="animation-delay: 0.6s">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#00bcd4">
+                    <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM8 15c0-1.66 1.34-3 3-3 .35 0 .69.07 1 .18V6h5v2h-3v7.03c-.02 1.64-1.35 2.97-3 2.97-1.66 0-3-1.34-3-3z"/>
+                </svg>
+                <div>
+                    <div class="sector-title">Entertainment</div>
+                    <div class="sector-description">Media & Creative Arts</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <div class="login-header">
+                <h1>SkillSage</h1>
+                <p>Access your professional dashboard</p>
+            </div>
+
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'Techvibe' && password === 'techvibe123') {
+                alert('Login successful! Welcome to SkillSage.');
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+            return false;
+        }
+
+        // Add hover effect to sector icons
+        document.querySelectorAll('.sector-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', () => {
+                icon.style.transform = 'translateX(10px)';
+            });
+            icon.addEventListener('mouseleave', () => {
+                icon.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>
