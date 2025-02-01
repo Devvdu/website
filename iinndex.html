@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSage - Professional Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #00bcd4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #login-container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: none;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00bcd4;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sectors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sector-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .course-container {
+            display: none;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            background: #00bcd4;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #008ba3;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tab.active {
+            background: #00bcd4;
+        }
+
+        .content-area {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        .progress {
+            height: 100%;
+            background: #00bcd4;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .exercise {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        #logout-btn {
+            background: rgba(255, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-message h1 {
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <div class="login-box">
+            <div class="welcome-message">
+                <h1>SkillSage</h1>
+                <p>Your journey to professional excellence starts here</p>
+            </div>
+            <form id="login-form" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="platform-container" style="display: none;">
+        <nav class="nav-bar">
+            <div class="logo">SkillSage</div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span id="user-info">Welcome, User!</span>
+                <button id="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="main-container" style="display: block;">
+            <div class="sectors" id="sectors">
+                <div class="sector-card" onclick="showCourses('technology')">
+                    <h2>Technology</h2>
+                    <p>Programming, Web Development, and more</p>
+                </div>
+                <div class="sector-card" onclick="showCourses('business')">
+                    <h2>Business & Finance</h2>
+                    <p>Management, Finance, and Analytics</p>
+                </div>
+                <div class="sector-card" onclick="showCourses('healthcare')">
+                    <h2>Healthcare</h2>
+                    <p>Medical Sciences and Healthcare Management</p>
+                </div>
+                <div class="sector-card" onclick="showCourses('entertainment')">
+                    <h2>Entertainment & Media</h2>
+                    <p>Digital Media, Production, and Design</p>
+                </div>
+            </div>
+
+            <div id="course-container" class="course-container">
+                <h2 id="sector-title"></h2>
+                <div id="course-grid" class="course-grid"></div>
+            </div>
+
+            <div id="content-section" class="content-section">
+                <h2 id="course-title"></h2>
+                <div class="progress-bar">
+                    <div class="progress" id="course-progress"></div>
+                </div>
+                <div class="tab-container">
+                    <div class="tab active" onclick="showTab('study')">Study Plan</div>
+                    <div class="tab" onclick="showTab('content')">Course Content</div>
+                    <div class="tab" onclick="showTab('exercise')">Exercises</div>
+                    <div class="tab" onclick="showTab('interview')">Interview Prep</div>
+                </div>
+                <div class="content-area" id="content-area"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const courses = {
+            technology: [
+                {
+                    title: 'Python Programming',
+                    description: 'Learn Python from basics to advanced',
+                    content: {
+                        study: `
+                            <h3>Python Learning Path</h3>
+                            <ul>
+                                <li>Week 1: Basic Syntax and Data Types
+                                    <ul>
+                                        <li>Variables and Data Types</li>
+                                        <li>Basic Operators</li>
+                                        <li>Input/Output Operations</li>
+                                    </ul>
+                                </li>
+                                <li>Week 2: Control Flow and Functions
+                                    <ul>
+                                        <li>Conditional Statements</li>
+                                        <li>Loops and Iterations</li>
+                                        <li>Function Definition and Usage</li>
+                                    </ul>
+                                </li>
+                                <li>Week 3: Data Structures
+                                    <ul>
+                                        <li>Lists and Tuples</li>
+                                        <li>Dictionaries and Sets</li>
+                                        <li>String Operations</li>
+                                    </ul>
+                                </li>
+                                <li>Week 4: Advanced Concepts
+                                    <ul>
+                                        <li>File Handling</li>
+                                        <li>Exception Handling</li>
+                                        <li>Modules and Packages</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        `,
+                        content: `
+                            <h3>Introduction to Python</h3>
+                            <p>Python is a high-level, interpreted programming language known for its simplicity and readability.</p>
+                            
+                            <h4>Your First Python Program</h4>
+                            <pre>
+# This is a simple Hello World program
+print("Hello, World!")
+
+# Getting input from user
+name = input("Enter your name: ")
+print(f"Welcome, {name}!")
+                            </pre>
+
+                            <h4>Variables and Data Types</h4>
+                            <pre>
+# Numbers
+age = 25                  # integer
+height = 5.9             # float
+
+# Strings
+name = "John Doe"
+message = 'Hello there'
+
+# Boolean
+is_student = True
+is_working = False
+
+# Printing variables
+print(f"Age: {age}")
+print(f"Height: {height}")
+print(f"Name: {name}")
+                            </pre>
+                        `,
+                        exercise: `
+                            <h3>Practice Exercises</h3>
+                            
+                            <div class="exercise">
+                                <h4>Exercise 1: Basic Variables</h4>
+                                <p>Create a program that:</p>
+                                <ol>
+                                    <li>Asks for the user's name</li>
+                                    <li>Asks for their age</li>
+                                    <li>Calculates and prints how old they will be in 10 years</li>
+                                </ol>
+                                <button class="btn" onclick="checkExercise(1)">Submit Solution</button>
+                            </div>
+
+                            <div class="exercise">
+                                <h4>Exercise 2: Simple Calculator</h4>
+                                <p>Create a basic calculator that:</p>
+                                <ol>
+                                    <li>Takes two numbers as input</li>
+                                    <li>Performs addition, subtraction, multiplication, and division</li>
+                                    <li>Prints all results</li>
+                                </ol>
+                                <button class="btn" onclick="checkExercise(2)">Submit Solution</button>
+                            </div>
+                        `,
+                        interview: `
+                            <h3>Common Python Interview Questions</h3>
+                            
+                            <div class="exercise">
+                                <h4>Basic Concepts</h4>
+                                <ul>
+                                    <li>What is Python? What are its key features?</li>
+                                    <li>Explain Python's memory management</li>
+                                    <li>What is PEP 8?</li>
+                                </ul>
+                            </div>
+
+                            <div class="exercise">
+                                <h4>Data Structures</h4>
+                                <ul>
+                                    <li>Difference between list and tuple</li>
+                                    <li>How do dictionaries work in Python?</li>
+                                    <li>What are list comprehensions?</li>
+                                </ul>
+                            </div>
+
+                            <div class="exercise">
+                                <h4>Practice Question</h4>
+                                <p>Write a program to reverse a string without using the reverse function.</p>
+                                <pre>
+def reverse_string(s):
+    # Your solution here
+    pass
+                                </pre>
+                            </div>
+                        `
+                    }
+                },
+                {
+                    title: 'Java Programming',
+                    description: 'Master Java development',
+                    content: {
+                        study: 'Coming soon...',
+                        content: 'Coming soon...',
+                        exercise: 'Coming soon...',
+                        interview: 'Coming soon...'
+                    }
+                },
+                {
+                    title: 'Web Development',
+                    description: 'HTML, CSS, and JavaScript',
+                    content: {
+                        study: 'Coming soon...',
+                        content: 'Coming soon...',
+                        exercise: 'Coming soon...',
+                        interview: 'Coming soon...'
+                    }
+                }
+            ],
+            business: [
+                {
+                    title: 'Financial Management',
+                    description: 'Understanding business finance',
+                    content: {
+                        study: 'Coming soon...',
+                        content: 'Coming soon...',
+                        exercise: 'Coming soon...',
+                        interview: 'Coming soon...'
+                    }
+                }
+            ],
+            healthcare: [
+                {
+                    title: 'Medical Terminology',
+                    description: 'Basic medical vocabulary',
+                    content: {
+                        study: 'Coming soon
