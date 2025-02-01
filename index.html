@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential Skills for Professionals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 500px;
+        }
+
+        .close-btn {
+            font-size: 25px;
+            cursor: pointer;
+            color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#business">Business</a></li>
+                <li><a href="#management">Management</a></li>
+                <li><a href="#entrepreneurship">Entrepreneurship</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#marketing">Marketing & Sales</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="business">
+            <h2>Essential Business Skills</h2>
+            <ul>
+                <li>Leadership & Management</li>
+                <li>Communication</li>
+                <li>Financial Literacy</li>
+                <li>Problem-Solving</li>
+                <li>Sales & Marketing</li>
+                <li>Customer Relationship Management (CRM)</li>
+            </ul>
+            <button onclick="showDetails('business')">Learn More</button>
+        </section>
+
+        <section id="management">
+            <h2>Essential Management Skills</h2>
+            <ul>
+                <li>Project Management</li>
+                <li>Team Management</li>
+                <li>Conflict Resolution</li>
+                <li>Change Management</li>
+                <li>Time Management</li>
+                <li>Risk Management</li>
+            </ul>
+            <button onclick="showDetails('management')">Learn More</button>
+        </section>
+
+        <section id="entrepreneurship">
+            <h2>Essential Entrepreneurship Skills</h2>
+            <ul>
+                <li>Innovation & Creativity</li>
+                <li>Fundraising & Investment</li>
+                <li>Networking</li>
+                <li>Financial Planning</li>
+            </ul>
+            <button onclick="showDetails('entrepreneurship')">Learn More</button>
+        </section>
+
+        <section id="finance">
+            <h2>Essential Finance Skills</h2>
+            <ul>
+                <li>Financial Modeling</li>
+                <li>Budgeting & Forecasting</li>
+                <li>Accounting Principles</li>
+                <li>Risk Management</li>
+                <li>Investment Strategies</li>
+            </ul>
+            <button onclick="showDetails('finance')">Learn More</button>
+        </section>
+
+        <section id="marketing">
+            <h2>Essential Marketing & Sales Skills</h2>
+            <ul>
+                <li>Digital Marketing</li>
+                <li>Brand Positioning</li>
+                <li>Market Research</li>
+                <li>Customer Engagement</li>
+                <li>Sales Strategies</li>
+            </ul>
+            <button onclick="showDetails('marketing')">Learn More</button>
+        </section>
+    </main>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h3 id="popupTitle"></h3>
+            <p id="popupDetails"></p>
+        </div>
+    </div>
+
+    <script>
+        function showDetails(section) {
+            const popup = document.getElementById("popup");
+            const popupTitle = document.getElementById("popupTitle");
+            const popupDetails = document.getElementById("popupDetails");
+
+            let title = '';
+            let details = '';
+
+            switch (section) {
+                case 'business':
+                    title = 'Business Skills';
+                    details = `
+                        <ul>
+                            <li><strong>Leadership & Management:</strong> Learn how to manage teams, make decisions, and build a strong business vision.</li>
+                            <li><strong>Communication:</strong> Improve your verbal and written communication, presentations, and negotiation skills.</li>
+                            <li><strong>Financial Literacy:</strong> Understand financial statements, budgets, and how to assess business performance.</li>
+                            <li><strong>Problem-Solving:</strong> Develop critical thinking and analytical skills to solve business problems efficiently.</li>
+                            <li><strong>Sales & Marketing:</strong> Learn how to position your brand, market products, and engage with customers.</li>
+                            <li><strong>CRM:</strong> Master CRM tools to build and maintain lasting customer relationships.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'management':
+                    title = 'Management Skills';
+                    details = `
+                        <ul>
+                            <li><strong>Project Management:</strong> Learn Agile, Scrum, and other project management methodologies.</li>
+                            <li><strong>Team Management:</strong> Discover how to build and lead high-performing teams.</li>
+                            <li><strong>Conflict Resolution:</strong> Learn techniques to resolve conflicts within teams.</li>
+                            <li><strong>Change Management:</strong> Gain strategies for managing organizational changes effectively.</li>
+                            <li><strong>Time Management:</strong> Learn how to prioritize tasks, delegate effectively, and meet deadlines.</li>
+                            <li><strong>Risk Management:</strong> Learn how to assess and mitigate business risks.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'entrepreneurship':
+                    title = 'Entrepreneurship Skills';
+                    details = `
+                        <ul>
+                            <li><strong>Innovation & Creativity:</strong> Learn to think outside the box and develop innovative solutions.</li>
+                            <li><strong>Fundraising & Investment:</strong> Master the art of pitching to investors and raising capital.</li>
+                            <li><strong>Networking:</strong> Build a strong professional network to support your entrepreneurial journey.</li>
+                            <li><strong>Financial Planning:</strong> Learn how to forecast and manage business finances.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'finance':
+                    title = 'Finance Skills';
+                    details = `
+                        <ul>
+                            <li><strong>Financial Modeling:</strong> Learn how to build financial models to assess business performance.</li>
+                            <li><strong>Budgeting & Forecasting:</strong> Master budgeting techniques and the art of forecasting future financial performance.</li>
+                            <li><strong>Accounting Principles:</strong> Understand basic accounting principles to manage company finances.</li>
+                            <li><strong>Risk Management:</strong> Identify and manage financial risks in your organization.</li>
+                            <li><strong>Investment Strategies:</strong> Learn how to evaluate and make informed investment decisions.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'marketing':
+                    title = 'Marketing & Sales Skills';
+                    details = `
+                        <ul>
+                            <li><strong>Digital Marketing:</strong> Learn SEO, social media marketing, email campaigns, and other digital strategies.</li>
+                            <li><strong>Brand Positioning:</strong> Master how to position your brand in the market effectively.</li>
+                            <li><strong>Market Research:</strong> Understand the market, your customers, and how to gather useful data.</li>
+                            <li><strong>Customer Engagement:</strong> Learn strategies to engage customers and improve customer loyalty.</li>
+                            <li><strong>Sales Strategies:</strong> Develop effective sales techniques to close deals and grow your business.</li>
+                        </ul>
+                    `;
+                    break;
+                default:
+                    title = 'Skill Details';
+                    details = 'Select a valid sector to see more details.';
+            }
+
+            popupTitle.innerHTML = title;
+            popupDetails.innerHTML = details;
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = 'none';
+        }
+    </script>
+</body>
+</html>
